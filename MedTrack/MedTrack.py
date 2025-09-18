@@ -5,7 +5,7 @@ from typing import Optional
 @dataclass
 class Usuario:
     email: str
-    username: str
+    username: str 
     password_hash: str
     nombre: str
     fecha_nacimiento: Optional[date] = None
