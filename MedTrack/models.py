@@ -13,7 +13,7 @@ class Usuario(db.Model):
     sexo = db.Column(db.String(20))
     altura_cm = db.Column(db.SmallInteger)
     nivel_actividad = db.Column(db.String(16))
-    activo = db.Column(db.Boolean, default=True)
+    activo = db.Column(db.Boolean, default=False)
     fecha_creacion_usuario = db.Column(db.DateTime, default=datetime.utcnow)
 
 class MedicacionUsuario(db.Model):
