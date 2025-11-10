@@ -1,0 +1,59 @@
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0">Medicaciones </h5>
+                <a class="btn btn-sm btn-primary" href="{{ url_for('meds.list_meds') }}">Ver todas</a>
+            </div>
+
+            {% if meds_hoy_grouped %}
+            <div class="accordion" id="accHoy">
+                {% for nombre, items in meds_hoy_grouped.items() %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="hoy-{{ loop.index }}">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#hoy-c-{{ loop.index }}"
+                                aria-expanded="false" aria-controls="hoy-c-{{ loop.index }}">
+                            {{ nombre }} <span class="ms-2 text-muted">({{ items|length }})</span>
+                        </button>
+                    </h2>
+                    <div id="hoy-c-{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#accHoy">
+                        <div class="accordion-body">
+                            <div class="table-responsive">
+                                <table class="table align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Programada para</th>
+                                            <th>Dosis</th>
+                                            <th>Instrucciones</th>
+                                            <th style="width:180px;">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in items %}
+                                        <tr>
+                                            <td class="text-nowrap">{{ item.programada_para.strftime("%d/%m/%Y %H:%M") }}</td>
+                                            <td>{{ item.dosis }} {{ item.unidad }}</td>
+                                            <td>{{ item.instrucciones or "—" }}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <a class="btn btn-success" href="#">Tomado</a>
+                                                    <a class="btn btn-outline-secondary" href="#">Avisar</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-muted mb-0">No hay tomas programadas en las próximas 24 horas.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
