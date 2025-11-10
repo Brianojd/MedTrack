@@ -44,12 +44,15 @@
     <Folder Include="static\" />
     <Folder Include="templates\" />
     <Folder Include="routes\" />
+    <Folder Include="templates\components\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
     <Content Include="static\style.css" />
     <Content Include="templates\base.html" />
+    <Content Include="templates\components\med_modal.html" />
     <Content Include="templates\index.html" />
+    <Content Include="templates\components\medhoylist.html" />
     <Content Include="templates\meds_form.html" />
     <Content Include="templates\meds_list.html" />
   </ItemGroup>

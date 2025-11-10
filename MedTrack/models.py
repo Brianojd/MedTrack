@@ -1,7 +1,20 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from enum import Enum
 
 db = SQLAlchemy()
+
+class MedicamentoNombreEnum(Enum):
+    IBUPROFENO   = "Ibuprofeno"
+    PARACETAMOL  = "Paracetamol"
+    AMOXICILINA  = "Amoxicilina"
+    AZITROMICINA = "Azitromicina"
+    CIPROFLOXACINO = "Ciprofloxacino"
+    DICLOFENAC   = "Diclofenac"
+    NAPROXENO    = "Naproxeno"
+    OMEPRAZOL    = "Omeprazol"
+    LORATADINA   = "Loratadina"
+    METFORMINA   = "Metformina"
 
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
