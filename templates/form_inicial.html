@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Datos iniciales</h2>
+
+<form method="POST" class="card p-4 shadow-sm">
+    <div class="mb-3">
+        <label class="form-label">Fecha de nacimiento</label>
+        <input type="date" name="fecha_nacimiento" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Sexo</label>
+        <select name="sexo" class="form-control" required>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Altura (cm)</label>
+        <input type="number" name="altura_cm" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nivel de actividad</label>
+        <select name="nivel_actividad" class="form-control" required>
+            <option value="sedentario">Sedentario</option>
+            <option value="ligero">Ligero</option>
+            <option value="moderado">Moderado</option>
+            <option value="intenso">Intenso</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary w-100" type="submit">Guardar</button>
+</form>
+{% endblock %}
