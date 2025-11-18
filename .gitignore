@@ -1,0 +1,14 @@
+﻿# Visual Studio
+.vs/
+*.user
+*.suo
+
+# .NET build
+bin/
+obj/
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv/

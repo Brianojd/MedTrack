@@ -1,0 +1,48 @@
+<div class="modal fade" id="modalCrearMed" tabindex="-1" aria-labelledby="modalCrearMedLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('meds.crear_med') }}">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalCrearMedLabel">Nueva Medicación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre</label>
+                            <input name="nombre" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Dosis</label>
+                            <input name="dosis" type="number" step="0.1" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Unidad</label>
+                            <input name="unidad" class="form-control" placeholder="mg, ml, etc" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Desde</label>
+                            <input name="desde" type="date" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Hasta (opcional)</label>
+                            <input name="hasta" type="date" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Hora diaria</label>
+                            <input name="hora" type="time" class="form-control" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Instrucciones (opcional)</label>
+                            <textarea name="instrucciones" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
