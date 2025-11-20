@@ -1,6 +1,6 @@
 import pytest
 from app import create_app
-from models import db, Usuario
+from data.models import db, Usuario
 
 
 

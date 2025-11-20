@@ -1,3 +1,4 @@
+
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from datetime import datetime, timedelta
 from decimal import Decimal, InvalidOperation
@@ -273,6 +274,30 @@ def marcar_tomado():
         flash(f"Error al actualizar la toma: {e}", "danger")
 
     return redirect(request.referrer or url_for("home"))
+
+@meds_bp.post("/borrar/<int:med_id>")
+def borrar_med(med_id):
+    user_id = get_logged_user_id()
+    if not user_id:
+        flash("Tenés que iniciar sesión.", "danger")
+        return redirect(url_for("login"))
+
+    # Buscar la medicación
+    med = MedicacionUsuario.query.filter_by(id=med_id, usuario_id=user_id).first()
+
+    if not med:
+        flash("La medicación no existe o no te pertenece.", "danger")
+        return redirect(url_for("meds.list_meds"))
+
+    # Borrar las métricas asociadas
+    MetricaMedicacionUsuario.query.filter_by(medicacion_usuario_id=med.id).delete()
+
+    # Borrar la medicación
+    db.session.delete(med)
+    db.session.commit()
+
+    flash("Medicacion eliminada correctamente.", "success")
+    return redirect(url_for("meds.list_meds"))
 
 
 @meds_bp.get("/historial")

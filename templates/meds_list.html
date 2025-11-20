@@ -32,18 +32,19 @@
                                 <th>Hasta</th>
                                 <th>Hora</th>
                                 <th>Instrucciones</th>
-                                <th style="width:140px;">Acciones</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>{{ m.dosis }} {{ m.unidad }}</td>
-                                <td>{{ m.desde.strftime("%d/%m/%Y") if m.desde else "—" }}</td>
-                                <td>{{ m.hasta.strftime("%d/%m/%Y") if m.hasta else "—" }}</td>
-                                <td>{{ m.hora.strftime("%H:%M") if m.hora else "—" }}</td>
-                                <td>{{ m.instrucciones or "—" }}</td>
-                               
-                            </tr>
+                     <tr>
+                                        <td>{{ m.dosis }} {{ m.unidad }}</td>
+                                        <td>{{ m.desde.strftime("%d/%m/%Y") if m.desde else "—" }}</td>
+                                        <td>{{ m.hasta.strftime("%d/%m/%Y") if m.hasta else "—" }}</td>
+                                        <td>{{ m.hora.strftime("%H:%M") if m.hora else "—" }}</td>
+                                        <td>{{ m.instrucciones or "—" }}</td>
+                                        
+                                    </tr>
+
                         </tbody>
                     </table>
                 </div>
