@@ -1,0 +1,34 @@
+{% if meds_hoy and meds_hoy|length > 0 %}
+<div class="card">
+    <div class="card-header">
+        Medicaciones programadas para hoy
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for item in meds_hoy %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <div class="fw-semibold">
+                    {{ item.nombre_medicamento }}
+                    {% if item.dosis %}
+                        - {{ item.dosis }} {{ item.unidad or "" }}
+                    {% endif %}
+                </div>
+                <div class="small text-muted">
+                    Hora: {{ item.programada_para.strftime("%H:%M") }}
+                    {% if item.instrucciones %}
+                        · {{ item.instrucciones }}
+                    {% endif %}
+                </div>
+            </div>
+
+        
+
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<div class="alert alert-info">
+    No tenés medicaciones pendientes para hoy. 🎉
+</div>
+{% endif %}

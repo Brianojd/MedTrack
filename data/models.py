@@ -25,20 +25,20 @@ class Usuario(db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     nombre = db.Column(db.String(200))
 
-    # Campos del formulario inicial
+    
     fecha_nacimiento = db.Column(db.Date)
     sexo = db.Column(db.String(20))
     altura_cm = db.Column(db.SmallInteger)
     nivel_actividad = db.Column(db.String(16))
 
-    # ⭐ ACÁ ESTÁ EL PROBLEMA ⭐
+   
     form_completado = db.Column(db.Boolean, default=False)
 
-    # Otros existentes
+   
     activo = db.Column(db.Boolean, default=False)
     fecha_creacion_usuario = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Métodos para manejar contraseñas
+    
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 

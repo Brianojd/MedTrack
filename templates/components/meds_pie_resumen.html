@@ -1,0 +1,56 @@
+<div class="card">
+    <div class="card-header">Estado de tus tomas</div>
+    <div class="card-body">
+
+        <div id="graphContainer" class="text-center text-muted">
+            Cargando datos...
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+        fetch("/meds/resumen/data")
+            .then(r => r.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById("graphContainer").innerHTML = 
+                        "Tenés que iniciar sesión.";
+                    return;
+                }
+
+                const total = data.tomado + data.tarde + data.omitido + data.sin_estado;
+
+                if (total === 0) {
+                    document.getElementById("graphContainer").innerHTML =
+                        "Todavía no hay tomas registradas para mostrar en el gráfico.";
+                    return;
+                }
+
+                document.getElementById("graphContainer").innerHTML =
+                    '<canvas id="medsPieChart" width="300" height="300"></canvas>';
+
+                const ctx = document.getElementById("medsPieChart");
+
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Tomado', 'Tarde', 'Omitido', 'Sin estado'],
+                        datasets: [{
+                            data: [
+                                data.tomado,
+                                data.tarde,
+                                data.omitido,
+                                data.sin_estado
+                            ],
+                            backgroundColor: ['#198754', '#ffc107', '#dc3545', '#6c757d']
+                        }]
+                    },
+                    options: {
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            });
+        </script>
+
+    </div>
+</div>

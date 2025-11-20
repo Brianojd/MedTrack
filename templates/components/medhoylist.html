@@ -36,10 +36,22 @@
                                             <td>{{ item.dosis }} {{ item.unidad }}</td>
                                             <td>{{ item.instrucciones or "—" }}</td>
                                             <td>
-                                                <div class="btn-group btn-group-sm">
-                                                    <a class="btn btn-success" href="#">Tomado</a>
+                                               <div class="btn-group btn-group-sm">
+
+                                                    <form method="POST"
+                                                        action="{{ url_for('meds.marcar_tomado') }}"
+                                                        class="d-inline"
+                                                        onsubmit="return confirm('¿Marcar esta toma como TOMADA?');">
+                                                        <input type="hidden" name="med_id" value="{{ item.med_id }}">
+                                                        <input type="hidden" name="programada_para" value="{{ item.programada_para.isoformat() }}">
+                                                        <button type="submit" class="btn btn-success btn-sm">
+                                                            Tomado
+                                                        </button>
+                                                    </form>
+
                                                     <a class="btn btn-outline-secondary" href="#">Avisar</a>
                                                 </div>
+
                                             </td>
                                         </tr>
                                         {% endfor %}

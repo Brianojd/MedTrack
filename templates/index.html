@@ -2,57 +2,86 @@
 {% block content %}
 
 <div class="row g-4">
-<div class="col-12">
-<div class="p-4 rounded bg-white border">
-<h2 class="mb-2">Hola, {{ usuario.nombre or usuario.username or usuario.email }} 👋</h2>
-<p class="text-muted mb-0">Bienvenido/a a MedTrack.</p>
-</div>
-</div>
 
-<div class="col-md-4">
-    <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">Tu perfil</h5>
-            <ul class="list-unstyled m-0">
-                <li><strong>Edad:</strong> {{ edad or "—" }} años</li>
-                <li><strong>Altura:</strong> {{ usuario.altura_cm or "—" }} cm</li>
-                <li><strong>Nivel de actividad:</strong> {{ usuario.nivel_actividad or "—" }}</li>
-                <li><strong>Activo:</strong> {{ "Sí" if usuario.activo else "No" }}</li>
-            </ul>
+   
+    <div class="col-12">
+        <div class="p-4 rounded bg-white border">
+            <h2 class="mb-2">Hola, {{ usuario.nombre or usuario.username or usuario.email }} 👋</h2>
+            <p class="text-muted mb-0">Bienvenido/a a MedTrackk.</p>
         </div>
     </div>
-</div>
 
-<div class="col-md-4">
-    <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">IMC</h5>
-            {% if imc is not none %}
-            <p class="display-6">{{ "%.1f"|format(imc) }}</p>
-            <p class="mb-0 text-muted">{{ clasificacion_imc }}</p>
-            {% else %}
-            <p class="mb-0 text-muted">Cargá tu peso en Métricas para calcular tu IMC.</p>
-            {% endif %}
+    
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Tu perfil</h5>
+                <ul class="list-unstyled m-0">
+                    <li><strong>Edad:</strong> {{ edad or "—" }} años</li>
+                    <li><strong>Altura:</strong> {{ usuario.altura_cm or "—" }} cm</li>
+                    <li><strong>Nivel de actividad:</strong> {{ usuario.nivel_actividad or "—" }}</li>
+                    <li><strong>Activo:</strong> {{ "Sí" if usuario.activo else "No" }}</li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="col-md-4">
-    <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">Agua diaria</h5>
-            {% if agua_litros is not none %}
-            <p class="display-6">{{ "%.1f"|format(agua_litros) }} L</p>
-            <p class="mb-0 text-muted">Estimado (≈35 ml/kg/día)</p>
-            {% else %}
-            <p class="mb-0 text-muted">Necesitamos tu peso para estimarlo.</p>
-            {% endif %}
+   
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">IMC</h5>
+                {% if imc is not none %}
+                    <p class="display-6">{{ "%.1f"|format(imc) }}</p>
+                    <p class="mb-0 text-muted">{{ clasificacion_imc }}</p>
+                {% else %}
+                    <p class="mb-0 text-muted">Cargá tu peso en Métricas para calcular tu IMC.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
+
+    
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Agua diaria</h5>
+                {% if agua_litros is not none %}
+                    <p class="display-6">{{ "%.1f"|format(agua_litros) }} L</p>
+                    <p class="mb-0 text-muted">Estimado (≈35 ml/kg/día)</p>
+                {% else %}
+                    <p class="mb-0 text-muted">Necesitamos tu peso para estimarlo.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="col-12">
+        {% if clasificacion_imc == "Normal" %}
+            {% include "components/imc_carousel_normopeso.html" %}
+        {% elif clasificacion_imc == "Bajo peso" %}
+            {% include "components/imc_carousel_bajopeso.html" %}
+        {% elif clasificacion_imc == "Sobrepeso" or clasificacion_imc == "Obesidad" %}
+            {% include "components/imc_carousel_sobrepeso.html" %}
+        {% else %}
+            <div class="alert alert-info">
+                Completa tu peso en la sección Métricas para ver recomendaciones de salud personalizadas aquí.
+            </div>
+        {% endif %}
+    </div>
+
+   
+    <div class="col-12">
+        {% include "components/medhoylist.html" %}
+    </div>
+
+   
+<div class="col-12 col-md-6 mx-auto">
+    {% include "components/meds_pie_resumen.html" %}
 </div>
 
-{% include "components/medhoylist.html" %}
-
 
 </div>
+
 {% endblock %}

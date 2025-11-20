@@ -42,12 +42,7 @@
                                 <td>{{ m.hasta.strftime("%d/%m/%Y") if m.hasta else "—" }}</td>
                                 <td>{{ m.hora.strftime("%H:%M") if m.hora else "—" }}</td>
                                 <td>{{ m.instrucciones or "—" }}</td>
-                                <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="#" class="btn btn-outline-primary">Editar</a>
-                                        <a href="#" class="btn btn-outline-danger">Borrar</a>
-                                    </div>
-                                </td>
+                               
                             </tr>
                         </tbody>
                     </table>

@@ -1,6 +1,4 @@
-from flask import Blueprint
+from .meds import meds_bp
+from .metrics import metrics_bp
 
-meds_bp = Blueprint("meds", __name__, url_prefix="/meds")
-metrics_bp = Blueprint("metrics", __name__, url_prefix="/metrics")
-
-from . import meds, metrics 
+__all__ = ["meds_bp", "metrics_bp"]
